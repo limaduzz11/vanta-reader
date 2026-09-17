@@ -5,6 +5,8 @@
 **Leitor digital local-first e open source para livros e quadrinhos construído com Flutter.**
 
 [![CI](https://github.com/limaduzz11/vanta-reader/actions/workflows/ci.yml/badge.svg)](https://github.com/limaduzz11/vanta-reader/actions/workflows/ci.yml)
+[![Status](https://img.shields.io/badge/Status-Em_Desenvolvimento_Ativo-orange.svg?style=flat)](#downloads--disponibilidade)
+[![Release](https://img.shields.io/badge/Release-v0.3.0--preview-blue.svg?style=flat)](https://github.com/limaduzz11/vanta-reader/releases)
 [![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?style=flat&logo=flutter&logoColor=white)](https://flutter.dev)
 [![Dart](https://img.shields.io/badge/Dart-3.x-0175C2?style=flat&logo=dart&logoColor=white)](https://dart.dev)
 [![SQLite](https://img.shields.io/badge/SQLite-WAL_v5-003B57?style=flat&logo=sqlite&logoColor=white)](https://sqlite.org)
@@ -32,8 +34,8 @@
 - [Suporte de Plataforma](#suporte-de-plataforma)
 - [Principais Funcionalidades](#principais-funcionalidades)
 - [Arquitetura](#arquitetura)
-- [Como Executar](#como-executar)
-- [Testes & Qualidade](#testes--qualidade)
+- [Downloads & Disponibilidade](#downloads--disponibilidade)
+- [Compilação & Testes Locais](#compilação--testes-locais)
 - [Como Contribuir](#como-contribuir)
 - [Roadmap](#roadmap)
 - [Licença](#licença)
@@ -92,49 +94,35 @@ Para decisões arquiteturais aprofundadas, consulte a [Documentação de Arquite
 
 ---
 
-## Como Executar
+## Downloads & Disponibilidade
 
-### Pré-requisitos
-- [Flutter SDK](https://flutter.dev/docs/get-started/install) (canal stable, >= 3.12.0)
-- Dart SDK (>= 3.12.2)
-- Android SDK ou ferramentas de compilação Linux desktop
+> **Status do Projeto:** O VANTA Reader está atualmente em **desenvolvimento ativo**.  
+> O aplicativo está em fase de estabilização, e os binários prontos para uso, junto com o guia completo de compilação a partir do código-fonte, serão disponibilizados nos próximos marcos.
 
-### Instalação
+### Distribuição (APK)
 
-1. **Clone o repositório:**
-   ```bash
-   git clone https://github.com/limaduzz11/vanta-reader.git
-   cd vanta-reader
-   ```
+O principal canal de distribuição do VANTA Reader é através de pacotes **APK para Android** prontos para instalação direta (sideload) — sem lojas proprietárias, sem necessidade de conta e com zero rastreamento:
 
-2. **Instale as dependências:**
-   ```bash
-   flutter pub get
-   ```
+| Pacote | Alvo | Estado | Download |
+| :--- | :--- | :---: | :--- |
+| **APK de Release** (Assinado) | Android (Celular & Tablet) | `Em Breve` | Canal oficial de releases |
+| **Build Preview** (Testes) | Android (Celular & Tablet) | `Disponível` | [Baixar v0.3.0-preview](https://github.com/limaduzz11/vanta-reader/releases/tag/v0.3.0-preview) |
 
-3. **Inicie a aplicação:**
-   ```bash
-   flutter run
-   ```
+#### Como Instalar (Sideload no Android)
+1. Baixe o arquivo `.apk` diretamente na aba de [Releases](https://github.com/limaduzz11/vanta-reader/releases) pelo navegador do seu aparelho Android (ou baixe no PC e transfira para o celular/tablet).
+2. Abra o arquivo APK baixado usando o gerenciador de arquivos do aparelho.
+3. Se solicitado pelo Android, confirme a permissão para instalar fontes desconhecidas para o gerenciador e conclua a instalação.
 
 ---
 
-## Testes & Qualidade
+## Compilação & Testes Locais
 
-O projeto conta com uma suíte de testes automatizados cobrindo regras de negócio, BLoCs, migrações SQLite e fluxos de ponta a ponta:
+As instruções completas para compilar e validar o VANTA Reader a partir do código-fonte no seu próprio computador (incluindo configuração do Flutter SDK, ambiente Dart, ferramentas de compilação Android e execução da suíte de testes automatizados) serão disponibilizadas publicamente assim que os módulos centrais forem estabilizados.
 
-```bash
-# Verificar formatação
-dart format --output=none --set-exit-if-changed lib/ test/
+- **Execução Local:** Guias detalhados para rodar no Linux desktop e em emuladores/dispositivos Android estão em desenvolvimento.
+- **Suíte de Testes:** A suíte de validação automatizada (cobrindo Use Cases de domínio, BLoCs, migrações de banco SQLite e parsers de leitura) terá seus comandos de execução documentados em uma próxima release.
 
-# Análise estática
-flutter analyze
-
-# Executar suíte de testes
-flutter test
-```
-
-Essas verificações são validadas automaticamente em cada Pull Request via [GitHub Actions CI](.github/workflows/ci.yml).
+Você pode acompanhar os marcos planejados no [ROADMAP.md](ROADMAP.md) e consultar os detalhes técnicos na [Documentação de Arquitetura](docs/ARCHITECTURE.md).
 
 ---
 

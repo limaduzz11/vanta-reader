@@ -5,6 +5,8 @@
 **An open-source, local-first reader for books and comics built with Flutter.**
 
 [![CI](https://github.com/limaduzz11/vanta-reader/actions/workflows/ci.yml/badge.svg)](https://github.com/limaduzz11/vanta-reader/actions/workflows/ci.yml)
+[![Status](https://img.shields.io/badge/Status-In_Active_Development-orange.svg?style=flat)](#downloads--availability)
+[![Release](https://img.shields.io/badge/Release-v0.3.0--preview-blue.svg?style=flat)](https://github.com/limaduzz11/vanta-reader/releases)
 [![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?style=flat&logo=flutter&logoColor=white)](https://flutter.dev)
 [![Dart](https://img.shields.io/badge/Dart-3.x-0175C2?style=flat&logo=dart&logoColor=white)](https://dart.dev)
 [![SQLite](https://img.shields.io/badge/SQLite-WAL_v5-003B57?style=flat&logo=sqlite&logoColor=white)](https://sqlite.org)
@@ -32,8 +34,8 @@
 - [Platform Support](#platform-support)
 - [Key Features](#key-features)
 - [Architecture](#architecture)
-- [Getting Started](#getting-started)
-- [Testing & Quality](#testing--quality)
+- [Downloads & Availability](#downloads--availability)
+- [Build & Test from Source](#build--test-from-source)
 - [Contributing](#contributing)
 - [Roadmap](#roadmap)
 - [License](#license)
@@ -92,49 +94,35 @@ For in-depth design decisions and patterns, read the [Architecture Documentation
 
 ---
 
-## Getting Started
+## Downloads & Availability
 
-### Prerequisites
-- [Flutter SDK](https://flutter.dev/docs/get-started/install) (stable channel, >= 3.12.0)
-- Dart SDK (>= 3.12.2)
-- Android SDK or Linux desktop build tools
+> **Project Status:** VANTA Reader is currently in **active development**.  
+> The application is being stabilized, and pre-built binaries along with full build-from-source guidelines will be published in upcoming milestones.
 
-### Setup
+### Distribution (APK)
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/limaduzz11/vanta-reader.git
-   cd vanta-reader
-   ```
+The primary distribution channel for VANTA Reader is direct, standalone **Android APK** packages — no third-party app stores, no account registration, and zero trackers:
 
-2. **Install dependencies:**
-   ```bash
-   flutter pub get
-   ```
+| Package | Target | Status | Download |
+| :--- | :--- | :---: | :--- |
+| **Release APK** (Signed) | Android (Phone & Tablet) | `Coming Soon` | Official release channel |
+| **Preview Build** (Testing) | Android (Phone & Tablet) | `Available` | [Download v0.3.0-preview](https://github.com/limaduzz11/vanta-reader/releases/tag/v0.3.0-preview) |
 
-3. **Run the app:**
-   ```bash
-   flutter run
-   ```
+#### How to Install (Android Sideload)
+1. Download the `.apk` file from the [Releases](https://github.com/limaduzz11/vanta-reader/releases) page directly on your Android device (or download on PC and transfer to device).
+2. Open the downloaded APK using your file manager.
+3. If prompted, allow installation from this source and confirm install.
 
 ---
 
-## Testing & Quality
+## Build & Test from Source
 
-The codebase includes an automated test suite covering unit logic, BLoCs, SQLite migrations, and end-to-end integration:
+Full instructions for building and validating VANTA Reader from source on your local machine (including Flutter SDK setup, Dart environment, Android build tools, and running the automated test suite) will be made available once the core development milestones stabilize.
 
-```bash
-# Verify formatting
-dart format --output=none --set-exit-if-changed lib/ test/
+- **Local Execution:** Source setup guides for running on Linux desktop and Android devices are currently in progress.
+- **Automated Tests:** The internal test suite (covering domain Use Cases, BLoCs, SQLite migrations, and parsers) will be documented with public test-runner commands in an upcoming release.
 
-# Run static analysis
-flutter analyze
-
-# Execute test suite
-flutter test
-```
-
-All Pull Requests run these checks automatically through our [GitHub Actions CI](.github/workflows/ci.yml).
+You can follow upcoming milestones in [ROADMAP.md](ROADMAP.md) or inspect architectural patterns in [Architecture Documentation](docs/ARCHITECTURE.md).
 
 ---
 
