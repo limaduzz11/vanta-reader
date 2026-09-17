@@ -42,8 +42,7 @@ class VantaConfig {
     return raw.isNotEmpty ? raw : null;
   }
 
-  static String _strip(String url) =>
-      url.trim().replaceAll(RegExp(r'/$'), '');
+  static String _strip(String url) => url.trim().replaceAll(RegExp(r'/$'), '');
 
   /// Carrega o override persistido (`settings`) para memória. Best-effort:
   /// falha silenciosa mantém o default.

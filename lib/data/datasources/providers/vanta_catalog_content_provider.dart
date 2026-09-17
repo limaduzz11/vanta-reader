@@ -38,21 +38,21 @@ class VantaCatalogContentProvider implements ContentProvider {
 
   @override
   ProviderCapabilities get capabilities => const ProviderCapabilities(
-        supportsSearch: true,
-        supportsDownload: true,
-        supportsStreaming: false,
-        supportedFormats: {
-          WorkFormat.epub,
-          WorkFormat.pdf,
-          WorkFormat.cbz,
-          WorkFormat.cbr,
-          WorkFormat.txt,
-          WorkFormat.images,
-        },
-        supportedLanguages: {'pt-BR', 'en', 'und'},
-        supportedTypes: {WorkType.book, WorkType.comic},
-        contentSourceType: 'officialCatalog',
-      );
+    supportsSearch: true,
+    supportsDownload: true,
+    supportsStreaming: false,
+    supportedFormats: {
+      WorkFormat.epub,
+      WorkFormat.pdf,
+      WorkFormat.cbz,
+      WorkFormat.cbr,
+      WorkFormat.txt,
+      WorkFormat.images,
+    },
+    supportedLanguages: {'pt-BR', 'en', 'und'},
+    supportedTypes: {WorkType.book, WorkType.comic},
+    contentSourceType: 'officialCatalog',
+  );
 
   String _stripPrefix(String externalId) {
     if (externalId.startsWith(VantaConfig.externalIdPrefix)) {
@@ -125,13 +125,17 @@ class VantaCatalogContentProvider implements ContentProvider {
         options: Options(receiveTimeout: timeout, sendTimeout: timeout),
       );
 
-      if (response.statusCode != 200 || response.data is! Map<String, dynamic>) {
+      if (response.statusCode != 200 ||
+          response.data is! Map<String, dynamic>) {
         return [];
       }
       final parsed = VantaSearchResponse.fromJson(
         response.data as Map<String, dynamic>,
       );
-      final results = parsed.items.map(_mapSummary).whereType<ExternalWorkMetadata>().toList();
+      final results = parsed.items
+          .map(_mapSummary)
+          .whereType<ExternalWorkMetadata>()
+          .toList();
 
       // A API v0.2 não filtra por topic; o filtro de tipo é aplicado aqui
       // para não vazar heurística para o gateway.
@@ -159,7 +163,8 @@ class VantaCatalogContentProvider implements ContentProvider {
         '$_base/v1/books/$rawId',
         options: Options(receiveTimeout: timeout, sendTimeout: timeout),
       );
-      if (response.statusCode != 200 || response.data is! Map<String, dynamic>) {
+      if (response.statusCode != 200 ||
+          response.data is! Map<String, dynamic>) {
         return null;
       }
       final edition = VantaBookEdition.fromJson(
@@ -239,10 +244,7 @@ class VantaCatalogContentProvider implements ContentProvider {
       pageCount: 0,
       publisher: s.publisher,
       publishedDate: s.year?.toString(),
-      extraMetadata: {
-        if (s.year != null) 'year': s.year,
-        'formats': s.formats,
-      },
+      extraMetadata: {if (s.year != null) 'year': s.year, 'formats': s.formats},
     );
   }
 
@@ -261,8 +263,8 @@ class VantaCatalogContentProvider implements ContentProvider {
     final format = first?.extension != null
         ? WorkFormat.fromExtension(first!.extension!)
         : (formats.isNotEmpty
-            ? WorkFormat.fromExtension(formats.first)
-            : WorkFormat.unknown);
+              ? WorkFormat.fromExtension(formats.first)
+              : WorkFormat.unknown);
 
     return ExternalWorkMetadata(
       providerId: id,

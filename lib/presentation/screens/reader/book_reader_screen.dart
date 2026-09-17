@@ -695,15 +695,9 @@ class _BookReaderViewState extends State<_BookReaderView> {
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
-                      children: [
-                        14.0,
-                        16.0,
-                        18.0,
-                        20.0,
-                        22.0,
-                        24.0,
-                        28.0,
-                      ].map((size) {
+                      children: [14.0, 16.0, 18.0, 20.0, 22.0, 24.0, 28.0].map((
+                        size,
+                      ) {
                         final isSelected =
                             (typography.fontSize - size).abs() < 0.5;
                         return Padding(
@@ -878,7 +872,10 @@ class _BookReaderViewState extends State<_BookReaderView> {
       child: InkWell(
         onTap: () => bloc.add(UpdateTypographyEvent(themeMode: targetMode)),
         child: Container(
-          padding: const EdgeInsets.symmetric(vertical: NovaSpacing.sm, horizontal: 2),
+          padding: const EdgeInsets.symmetric(
+            vertical: NovaSpacing.sm,
+            horizontal: 2,
+          ),
           decoration: BoxDecoration(
             color: pageColor,
             borderRadius: NovaShapes.roundedSm,
@@ -886,8 +883,8 @@ class _BookReaderViewState extends State<_BookReaderView> {
               color: isSelected
                   ? NovaColors.accent
                   : (pageColor == const Color(0xFFFFFFFF)
-                      ? const Color(0xFFD0D0D0)
-                      : NovaColors.border),
+                        ? const Color(0xFFD0D0D0)
+                        : NovaColors.border),
               width: isSelected ? 2.0 : 1.0,
             ),
           ),

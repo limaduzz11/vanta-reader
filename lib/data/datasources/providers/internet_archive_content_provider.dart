@@ -306,9 +306,7 @@ class InternetArchiveContentProvider implements ContentProvider {
     final expected = filter.toLowerCase().split('-').first;
     final actual = (raw ?? '').toLowerCase().split('-').first;
     if (expected == 'pt') {
-      return actual == 'pt' ||
-          actual == 'por' ||
-          actual.startsWith('portugu');
+      return actual == 'pt' || actual == 'por' || actual.startsWith('portugu');
     }
     if (expected == 'en') {
       return actual == 'en' || actual == 'eng' || actual.startsWith('engli');

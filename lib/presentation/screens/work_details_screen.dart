@@ -689,7 +689,9 @@ class _WorkDetailsScreenState extends State<WorkDetailsScreen> {
         Text('SINOPSE', style: NovaTypography.caption),
         const SizedBox(height: NovaSpacing.sm),
         Text(
-          widget.work.description ?? _enrichedDescription ?? 'Sinopse não disponível.',
+          widget.work.description ??
+              _enrichedDescription ??
+              'Sinopse não disponível.',
           style: NovaTypography.bodyMedium.copyWith(height: 1.6),
         ),
       ],

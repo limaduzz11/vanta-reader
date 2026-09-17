@@ -95,21 +95,25 @@ void main() {
     return (work, edition, targetPath);
   }
 
-  test('G-01 delete(deleteFile:true) remove arquivo+.part e reverte biblioteca', () async {
-    final (work, edition, targetPath) = await seedDownloadedWork('del');
+  test(
+    'G-01 delete(deleteFile:true) remove arquivo+.part e reverte biblioteca',
+    () async {
+      final (work, edition, targetPath) = await seedDownloadedWork('del');
 
-    await downloadManager.delete('dl-onda1-del', deleteFile: true);
+      await downloadManager.delete('dl-onda1-del', deleteFile: true);
 
-    expect(await File(targetPath).exists(), isFalse);
-    expect(await File('$targetPath.part').exists(), isFalse);
-    expect(await downloadRepo.getDownloadById('dl-onda1-del'), isNull);
+      expect(await File(targetPath).exists(), isFalse);
+      expect(await File('$targetPath.part').exists(), isFalse);
+      expect(await downloadRepo.getDownloadById('dl-onda1-del'), isNull);
 
-    final reloaded = await libraryRepo.getWorkById(work.id);
-    expect(reloaded, isNotNull);
-    final reloadedEdition =
-        reloaded!.editions.firstWhere((e) => e.id == edition.id);
-    expect(reloadedEdition.isLocal, isFalse);
-  });
+      final reloaded = await libraryRepo.getWorkById(work.id);
+      expect(reloaded, isNotNull);
+      final reloadedEdition = reloaded!.editions.firstWhere(
+        (e) => e.id == edition.id,
+      );
+      expect(reloadedEdition.isLocal, isFalse);
+    },
+  );
 
   test('G-01 delete(deleteFile:false) mantém arquivo e biblioteca', () async {
     final (work, _, targetPath) = await seedDownloadedWork('keep');

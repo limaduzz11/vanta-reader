@@ -21,13 +21,12 @@ void main() {
                       'id': 1342,
                       'title': 'Pride and Prejudice',
                       'authors': [
-                        {'name': 'Austen, Jane'}
+                        {'name': 'Austen, Jane'},
                       ],
                       'summaries': ['A classic romance novel.'],
                       'languages': ['en'],
                       'formats': {
-                        'application/epub+zip':
-                            'https://example.com/1342.epub',
+                        'application/epub+zip': 'https://example.com/1342.epub',
                         'image/jpeg': 'https://example.com/1342.jpg',
                       },
                     },

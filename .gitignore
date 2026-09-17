@@ -15,21 +15,11 @@ migrate_working_dir/
 *.tar.gz
 *.bak*
 
-# Context Engine Internal Metadata
-PROJECT.md
-NOVAREADER-*.md
-
-
 # IntelliJ related
 *.iml
 *.ipr
 *.iws
 .idea/
-
-# The .vscode folder contains launch configuration and tasks you configure in
-# VS Code which you may wish to be included in version control, so this line
-# is commented out by default.
-#.vscode/
 
 # Flutter/Dart/Pub related
 **/doc/api/
@@ -41,18 +31,7 @@ NOVAREADER-*.md
 /build/
 /coverage/
 
-# Symbolication related
-app.*.symbols
-
-# Obfuscation related
-app.*.map.json
-
-# Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
-
-# Android & Local Machine Hardening (Prevenção de vazamento de host/chaves)
+# Android Studio & Local Machine Hardening
 android/local.properties
 android/.gradle/
 .gradle/
@@ -74,3 +53,10 @@ windows/flutter/ephemeral/
 macos/Flutter/ephemeral/
 ios/Flutter/ephemeral/
 .packages
+
+# Local project artifacts & internal research
+PROJECT.md
+NOVAREADER-*.md
+docs/audit/
+docs/research/
+

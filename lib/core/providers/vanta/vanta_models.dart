@@ -113,7 +113,18 @@ class VantaBookFile extends Equatable {
   }
 
   @override
-  List<Object?> get props => [id, extension, sizeBytes, pages, md5, sha1, sha256, topic, locator, available];
+  List<Object?> get props => [
+    id,
+    extension,
+    sizeBytes,
+    pages,
+    md5,
+    sha1,
+    sha256,
+    topic,
+    locator,
+    available,
+  ];
 }
 
 class VantaBookSummary extends Equatable {
@@ -158,7 +169,16 @@ class VantaBookSummary extends Equatable {
   }
 
   @override
-  List<Object?> get props => [id, title, authors, publisher, year, language, coverUrl, formats];
+  List<Object?> get props => [
+    id,
+    title,
+    authors,
+    publisher,
+    year,
+    language,
+    coverUrl,
+    formats,
+  ];
 }
 
 class VantaBookEdition extends Equatable {
@@ -197,7 +217,10 @@ class VantaBookEdition extends Equatable {
   factory VantaBookEdition.fromJson(Map<String, dynamic> json) {
     final rawFiles = json['files'];
     final files = rawFiles is List
-        ? rawFiles.whereType<Map<String, dynamic>>().map(VantaBookFile.fromJson).toList()
+        ? rawFiles
+              .whereType<Map<String, dynamic>>()
+              .map(VantaBookFile.fromJson)
+              .toList()
         : <VantaBookFile>[];
     return VantaBookEdition(
       id: json['id'].toString(),
@@ -218,7 +241,22 @@ class VantaBookEdition extends Equatable {
   }
 
   @override
-  List<Object?> get props => [id, title, authors, publisher, year, language, isbn, doi, pages, series, edition, coverUrl, topic, files];
+  List<Object?> get props => [
+    id,
+    title,
+    authors,
+    publisher,
+    year,
+    language,
+    isbn,
+    doi,
+    pages,
+    series,
+    edition,
+    coverUrl,
+    topic,
+    files,
+  ];
 }
 
 class VantaSearchResponse extends Equatable {
@@ -239,7 +277,10 @@ class VantaSearchResponse extends Equatable {
   factory VantaSearchResponse.fromJson(Map<String, dynamic> json) {
     final rawItems = json['items'];
     final items = rawItems is List
-        ? rawItems.whereType<Map<String, dynamic>>().map(VantaBookSummary.fromJson).toList()
+        ? rawItems
+              .whereType<Map<String, dynamic>>()
+              .map(VantaBookSummary.fromJson)
+              .toList()
         : <VantaBookSummary>[];
     return VantaSearchResponse(
       query: json['query']?.toString() ?? '',
@@ -280,5 +321,11 @@ class VantaHealthResponse extends Equatable {
   }
 
   @override
-  List<Object?> get props => [status, version, database, providerConfigured, uptimeSeconds];
+  List<Object?> get props => [
+    status,
+    version,
+    database,
+    providerConfigured,
+    uptimeSeconds,
+  ];
 }

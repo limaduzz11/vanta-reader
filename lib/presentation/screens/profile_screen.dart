@@ -860,7 +860,7 @@ class _GatewayFieldState extends State<_GatewayField> {
                     height: 20,
                     child: CircularProgressIndicator(strokeWidth: 2),
                   )
-                  : TextButton(
+                : TextButton(
                     onPressed: _save,
                     child: Text(
                       'APLICAR',

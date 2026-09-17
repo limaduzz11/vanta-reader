@@ -15,75 +15,75 @@ void main() {
     Map<String, dynamic>? lastQuery;
 
     Map<String, dynamic> searchJson() => {
-          'query': '1984',
-          'total': 2,
-          'limit': 20,
-          'offset': 0,
-          'items': [
-            {
-              'id': '12345',
-              'title': '1984',
-              'authors': ['George Orwell'],
-              'publisher': 'Example Publisher',
-              'year': 1949,
-              'language': 'English',
-              'cover_url': null,
-              'formats': ['epub', 'pdf'],
-            },
-            {
-              'id': 'c-1',
-              'title': 'HQ Teste',
-              'authors': 'Autor A; Autor B',
-              'publisher': null,
-              'year': '2020.0',
-              'language': 'Portuguese',
-              'cover_url': 'https://ex.example/c.jpg',
-              'formats': ['CBZ'],
-            },
-          ],
-        };
-
-    Map<String, dynamic> detailsJson() => {
+      'query': '1984',
+      'total': 2,
+      'limit': 20,
+      'offset': 0,
+      'items': [
+        {
           'id': '12345',
           'title': '1984',
           'authors': ['George Orwell'],
           'publisher': 'Example Publisher',
           'year': 1949,
           'language': 'English',
-          'isbn': '9780451524935',
-          'doi': null,
+          'cover_url': null,
+          'formats': ['epub', 'pdf'],
+        },
+        {
+          'id': 'c-1',
+          'title': 'HQ Teste',
+          'authors': 'Autor A; Autor B',
+          'publisher': null,
+          'year': '2020.0',
+          'language': 'Portuguese',
+          'cover_url': 'https://ex.example/c.jpg',
+          'formats': ['CBZ'],
+        },
+      ],
+    };
+
+    Map<String, dynamic> detailsJson() => {
+      'id': '12345',
+      'title': '1984',
+      'authors': ['George Orwell'],
+      'publisher': 'Example Publisher',
+      'year': 1949,
+      'language': 'English',
+      'isbn': '9780451524935',
+      'doi': null,
+      'pages': 328,
+      'series': null,
+      'edition': null,
+      'cover_url': 'https://ex.example/cover.jpg',
+      'topic': 'l',
+      'files': [
+        {
+          'id': 'f9876',
+          'extension': 'EPUB',
+          'size_bytes': 612000,
           'pages': 328,
-          'series': null,
-          'edition': null,
-          'cover_url': 'https://ex.example/cover.jpg',
+          'md5': 'abc123',
+          'sha1': null,
+          'sha256': null,
           'topic': 'l',
-          'files': [
-            {
-              'id': 'f9876',
-              'extension': 'EPUB',
-              'size_bytes': 612000,
-              'pages': 328,
-              'md5': 'abc123',
-              'sha1': null,
-              'sha256': null,
-              'topic': 'l',
-              'locator': '182386/abc123/1984.epub',
-              'available': true,
-            },
-            {
-              'id': 'f-off',
-              'extension': 'pdf',
-              'size_bytes': 10,
-              'pages': 1,
-              'md5': null,
-              'sha1': null,
-              'sha256': null,
-              'topic': 'l',
-              'locator': null,
-              'available': false,
-            },
-          ],
-        };
+          'locator': '182386/abc123/1984.epub',
+          'available': true,
+        },
+        {
+          'id': 'f-off',
+          'extension': 'pdf',
+          'size_bytes': 10,
+          'pages': 1,
+          'md5': null,
+          'sha1': null,
+          'sha256': null,
+          'topic': 'l',
+          'locator': null,
+          'available': false,
+        },
+      ],
+    };
 
     setUp(() {
       lastQuery = null;
@@ -153,7 +153,11 @@ void main() {
               );
             }
             return handler.resolve(
-              Response(requestOptions: options, statusCode: 404, data: {'detail': 'NF'}),
+              Response(
+                requestOptions: options,
+                statusCode: 404,
+                data: {'detail': 'NF'},
+              ),
             );
           },
         ),
@@ -172,7 +176,10 @@ void main() {
       expect(provider.capabilities.supportsDownload, isTrue);
       expect(provider.capabilities.supportsStreaming, isFalse);
       expect(provider.capabilities.metadataOnly, isFalse);
-      expect(provider.capabilities.contentSourceType, equals('officialCatalog'));
+      expect(
+        provider.capabilities.contentSourceType,
+        equals('officialCatalog'),
+      );
       expect(provider.capabilities.supportedFormats, contains(WorkFormat.epub));
       expect(provider.capabilities.supportedFormats, contains(WorkFormat.cbz));
       expect(provider.capabilities.supportedTypes, contains(WorkType.book));
@@ -219,20 +226,30 @@ void main() {
       expect(details.pageCount, equals(328));
       expect(details.isbn, equals('9780451524935'));
       expect(details.extraMetadata['md5'], equals('abc123'));
-      expect(details.extraMetadata['locator'], equals('182386/abc123/1984.epub'));
+      expect(
+        details.extraMetadata['locator'],
+        equals('182386/abc123/1984.epub'),
+      );
       expect(details.extraMetadata['topic'], equals('l'));
     });
 
-    test('6. resolveDownloadUrl retorna /download quando available; null quando indisponível',
-        () async {
-      final url = await provider.resolveDownloadUrl('vanta_12345', WorkFormat.epub);
-      expect(url, equals('$baseUrl/v1/files/f9876/download'));
+    test(
+      '6. resolveDownloadUrl retorna /download quando available; null quando indisponível',
+      () async {
+        final url = await provider.resolveDownloadUrl(
+          'vanta_12345',
+          WorkFormat.epub,
+        );
+        expect(url, equals('$baseUrl/v1/files/f9876/download'));
 
-      final unavailable =
-          await provider.resolveDownloadUrl('vanta_empty', WorkFormat.pdf);
-      // /v1/books/empty/files só tem available=false -> null.
-      expect(unavailable, isNull);
-    });
+        final unavailable = await provider.resolveDownloadUrl(
+          'vanta_empty',
+          WorkFormat.pdf,
+        );
+        // /v1/books/empty/files só tem available=false -> null.
+        expect(unavailable, isNull);
+      },
+    );
 
     test('7. checkHealth healthy no 200', () async {
       final health = await provider.checkHealth();

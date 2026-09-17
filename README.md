@@ -2,159 +2,156 @@
 
 <div align="center">
 
-![VANTA Reader](screen_vanta.png)
+**An open-source, local-first reader for books and comics built with Flutter.**
 
-### Plataforma Unificada e Local-First de Leitura Digital (Livros & Quadrinhos)
-**Desenvolvido pela VANTA Labz**
+[![CI](https://github.com/limaduzz11/vanta-reader/actions/workflows/ci.yml/badge.svg)](https://github.com/limaduzz11/vanta-reader/actions/workflows/ci.yml)
+[![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?style=flat&logo=flutter&logoColor=white)](https://flutter.dev)
+[![Dart](https://img.shields.io/badge/Dart-3.x-0175C2?style=flat&logo=dart&logoColor=white)](https://dart.dev)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](LICENSE)
 
-[![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev)
-[![Dart](https://img.shields.io/badge/Dart-3.x-0175C2?style=for-the-badge&logo=dart&logoColor=white)](https://dart.dev)
-[![SQLite](https://img.shields.io/badge/SQLite-WAL%20v5-003B57?style=for-the-badge&logo=sqlite&logoColor=white)](https://sqlite.org)
-[![Architecture](https://img.shields.io/badge/Clean-Architecture-4EAA25?style=for-the-badge)](docs/ARCHITECTURE.md)
-[![Tests](https://img.shields.io/badge/Tests-216%20Passing-brightgreen?style=for-the-badge)](test)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
+<br />
+
+[📖 Leia em Português](README.pt-BR.md)
+
+<br />
+
+![VANTA Reader Preview](screen_vanta.png)
 
 </div>
 
----
-
-## 📌 Visão Geral
-
-O **VANTA Reader** é uma aplicação móvel e tablet desenvolvida em **Flutter**, projetada para centralizar o consumo de **Livros** (EPUB, PDF, TXT) e **Quadrinhos/Mangás** (CBZ, CBR) sob uma filosofia estrita **Local-First**, interface com design minimalista monocromático (*Monochromatic Minimalism*) e engenharia de software desacoplada.
-
-O projeto resolve o problema da fragmentação de bibliotecas digitais: leitores tradicionais de EPUB raramente tratam quadrinhos com fluidez, enquanto leitores de mangá ignoram anotações e formatação de livros. O VANTA Reader unifica ambos com motores de renderização especializados.
+> Read EPUB, TXT, and CBZ files offline.  
+> Keep your library and reading progress strictly on your device.  
+> No account required.
 
 ---
 
-## ✨ Principais Funcionalidades
+## 📑 Table of Contents
 
-- 📚 **Suporte Abrangente a Formatos:**
-  - **Livros:** EPUB (com extração de TOC e capítulos estruturados), PDF vetorial e TXT com paginação contínua e sanitização.
-  - **Quadrinhos & Mangás:** Arquivos compactados CBZ/CBR com descompressão sob demanda e ordenação natural.
-- ⚡ **Local-First & Offline-First:**
-  - Banco de dados **SQLite WAL (schema v5)** local para controle transacional de biblioteca, autores, progresso (0–100%) e favoritos.
-  - Funcionamento autônomo sem necessidade de conta, login obrigatório ou telemetria invasiva.
-- 📖 **Motores de Leitura Dedicados:**
-  - **Book Reader Engine:** Modo imersivo fullscreen, navegação por toque lateral (25%/50%/25%), sumário interativo, controle de tipografia e persistência automática de progresso.
-  - **Comic Reader Engine:** Modo de visualização de página única com pinch-to-zoom (2.2x), visualizador vertical contínuo (Webtoon) e suporte a leitura orientada da direita para a esquerda (RTL/Mangá).
-  - **Gestão de Memória Anti-OOM:** Cache LRU em memória (`ComicPageCache`) com teto estrito de páginas/bytes para evitar estouro de heap em imagens 4K.
-- 📥 **Gerenciador de Downloads Persistente:**
-  - Fila persistente em SQLite com suporte a pausa, retomada, concorrência controlada e validação de integridade (MD5/SHA-256).
-- 🧩 **Arquitetura de Provedores Desacoplada:**
-  - Integração via contratos genéricos (`ContentProvider`) com normalização de metadados, identificação determinística de obras (`WorkIdentitySystem`) e suporte ao gateway neutro **VANTA Catalog**.
-- 🌓 **Monochromatic Minimalism & Acessibilidade:**
-  - Paleta escura de alto contraste (`#121212`, `#E0E0E0`, `#444444`), conformidade com diretrizes de contraste WCAG AAA e suporte nativo a TalkBack.
-  - Interface responsiva com adaptação entre celular (Bottom Navigation) e tablet (Navigation Rail e Split-View).
+- [Supported Formats](#-supported-formats)
+- [Platform Support](#-platform-support)
+- [Key Features](#-key-features)
+- [Architecture](#-architecture)
+- [Getting Started](#-getting-started)
+- [Testing & Quality](#-testing--quality)
+- [Contributing](#-contributing)
+- [Roadmap](#-roadmap)
+- [License](#-license)
 
 ---
 
-## 🏛️ Arquitetura & Engenharia
+## 📚 Supported Formats
 
-O projeto adota os princípios de **Clean Architecture** e separação de responsabilidades em 4 camadas fundamentais:
+| Format | Content Type | Status |
+|---|---|:---:|
+| **EPUB** | Books & Novels | Supported |
+| **TXT** | Plain Text | Supported |
+| **CBZ** | Comics & Manga (ZIP bundle) | Supported |
+| **PDF** | Books & Documents | Planned |
+| **CBR** | Comics & Manga (RAR bundle) | Planned |
+
+---
+
+## 📱 Platform Support
+
+- **Android** (Phone & Tablet) — Official / Primary
+- **Linux Desktop** — Supported
+- **Windows / macOS / iOS** — Planned
+
+---
+
+## ✨ Key Features
+
+- ⚡ **Local-First & Offline Storage:** Library metadata, authors, reading progress, and favorites are persisted in an embedded SQLite database (schema v5). Works 100% offline without remote telemetry.
+- 📖 **Dedicated Reading Engines:**
+  - **Books:** EPUB parser with Table of Contents navigation, chapter pagination, and dynamic typography adjustments.
+  - **Comics:** CBZ viewer featuring Single-Page mode (pinch-to-zoom 2.2x), continuous vertical scrolling (Webtoon), and right-to-left (RTL) mode for Manga.
+  - **LRU Memory Guard:** Decoded comic pages are managed by an in-memory LRU cache (`ComicPageCache`) with page and byte budgets to prevent out-of-memory crashes on high-res scans.
+- 📥 **Persistent Download Queue:** SQLite-backed download queue with pause/resume support, connection recovery, and checksum validation.
+- 🧩 **Extensible Content Providers:** Decoupled catalog discovery via the abstract `ContentProvider` interface and deterministic deduplication (`WorkIdentitySystem`).
+- 🌓 **Monochromatic Minimalism:** High-contrast dark theme designed for focus, responsive layouts adapting seamlessly between mobile (Bottom Navigation) and tablet (Navigation Rail).
+
+---
+
+## 🏛️ Architecture
+
+VANTA Reader is built following **Clean Architecture** conventions:
 
 ```text
 lib/
-├── core/                   # Utilitários transversais, tema, segurança (CryptoVault), logging e banco de dados
-│   ├── database/           # AppDatabase SQLite WAL (schema migrations v1 -> v5)
-│   ├── security/           # Encriptação AES-256 e sanitização contra Zip Slip / Path Traversal
-│   ├── theme/              # Design System Monochromatic Minimalism
-│   └── network/            # Cliente HTTP (Dio) resiliente
-├── domain/                 # Entidades canônicas de negócio, contratos de repositórios e Use Cases puros
-│   ├── entities/           # Work, WorkEdition, ContentAsset, ReadingProgress, DownloadItem
-│   ├── repositories/       # Interfaces abstratas de persistência e download
-│   └── usecases/           # Casos de uso atômicos (ImportWork, SaveProgress, SearchCatalog, etc.)
-├── data/                   # Implementação concreta de repositórios, data sources locais e provedores de conteúdo
-│   ├── datasources/        # Operações SQLite brutas, file storage particionado e cache
-│   ├── providers/          # Adaptadores de catálogo online (VANTA Catalog, Open Library, Internet Archive PD)
-│   └── repositories/       # Implementação dos contratos de domínio
-└── presentation/           # Interface do usuário com Flutter BLoC (gestão reativa de estado)
-    ├── blocs/              # LibraryBloc, BookReaderBloc, ComicReaderBloc, DownloadsBloc, SearchBloc
-    ├── screens/            # Telas principais (Home, Search, Library, Downloads, Profile, Readers)
-    └── widgets/            # Componentes atômicos reutilizáveis do Design System
+├── core/                   # Parsers, SQLite AppDatabase, LRU cache, and security utilities
+├── domain/                 # Pure Dart entities, repository interfaces, and atomic Use Cases
+├── data/                   # Repository implementations, local data sources, and catalog providers
+└── presentation/           # Flutter UI, screens, widgets, and BLoC state management
 ```
+
+For in-depth design decisions and patterns, read the [Architecture Documentation](docs/ARCHITECTURE.md).
 
 ---
 
-## 🧪 Qualidade & Testes
+## 🚀 Getting Started
 
-O repositório mantém uma suíte rigorosa de testes automatizados com cobertura para todas as regras de negócio críticas:
-
-- **216+ testes automatizados** passando com sucesso.
-- **Suíte de Testes:**
-  - Testes unitários de Use Cases e parsers de conteúdo.
-  - Testes de migração de banco de dados SQLite (v1 a v5 com backfill conservador).
-  - Testes de BLoCs reativos com `bloc_test`.
-  - Testes de ponta a ponta (E2E) de ciclo de vida de downloads e leitura offline.
-- **Auditoria de Código:** Análise estática contínua (`flutter analyze`) com **0 warnings / 0 errors**.
-
-Para executar os testes:
-
-```bash
-flutter test
-```
-
----
-
-## 🚀 Como Executar Localmente
-
-### Pré-requisitos
-- [Flutter SDK](https://flutter.dev/docs/get-started/install) (>= 3.12.0)
+### Prerequisites
+- [Flutter SDK](https://flutter.dev/docs/get-started/install) (stable channel, >= 3.12.0)
 - Dart SDK (>= 3.12.2)
-- Android SDK instalado com suporte a API 21+
-- Java JDK 17
+- Android SDK or Linux desktop build tools
 
-### Passo a Passo
+### Setup
 
-1. **Clone o repositório:**
+1. **Clone the repository:**
    ```bash
    git clone https://github.com/limaduzz11/vanta-reader.git
    cd vanta-reader
    ```
 
-2. **Instale as dependências:**
+2. **Install dependencies:**
    ```bash
    flutter pub get
    ```
 
-3. **Verifique o ambiente:**
-   ```bash
-   flutter doctor
-   flutter analyze
-   ```
-
-4. **Execute a suíte de testes:**
-   ```bash
-   flutter test
-   ```
-
-5. **Inicie a aplicação em um emulador ou dispositivo conectado:**
+3. **Run the app:**
    ```bash
    flutter run
    ```
 
 ---
 
-## 📖 Documentação Técnica Detalhada
+## 🧪 Testing & Quality
 
-Documentação aprofundada de engenharia e especificações técnicas estão disponíveis na pasta [`docs/`](docs/):
+The codebase includes an automated test suite covering unit logic, BLoCs, SQLite migrations, and end-to-end integration:
 
-- [Arquitetura Geral](docs/ARCHITECTURE.md)
-- [Design System & UI Specs](docs/DESIGN-SYSTEM.md)
-- [Arquitetura de Persistência SQLite & Migrações](docs/DATABASE.md)
-- [Book Reader Engine (EPUB / PDF / TXT)](docs/BOOK-READER.md)
-- [Comic Reader Engine & Cache LRU Anti-OOM](docs/COMIC-READER.md)
-- [Estratégia Offline-First & Isolamento Local](docs/OFFLINE-FIRST.md)
-- [Especificação da API do Catálogo VANTA](docs/VANTA-CATALOG-API.md)
-- [Diretrizes de Segurança & Hardening](docs/SECURITY.md)
+```bash
+# Verify formatting
+dart format --output=none --set-exit-if-changed lib/ test/
+
+# Run static analysis
+flutter analyze
+
+# Execute test suite
+flutter test
+```
+
+All Pull Requests run these checks automatically through our [GitHub Actions CI](.github/workflows/ci.yml).
 
 ---
 
-## 📄 Licença
+## 🤝 Contributing
 
-Distribuído sob a licença **MIT**. Consulte [`LICENSE`](LICENSE) para mais informações.
+Contributions are welcome! Please check out [CONTRIBUTING.md](CONTRIBUTING.md) to get started, review our [Code of Conduct](CODE_OF_CONDUCT.md), and explore open issues.
+
+---
+
+## 🗺️ Roadmap
+
+See [ROADMAP.md](ROADMAP.md) for milestone tracking, upcoming features (including PDF and CBR support), and release plans. All release updates are tracked in [CHANGELOG.md](CHANGELOG.md).
+
+---
+
+## 📄 License
+
+Published under the [MIT License](LICENSE).
 
 ---
 
 <div align="center">
-  <sub>Criado e mantido por <b>Eduardo de Lima Paranhos</b> — <b>VANTA Labz</b></sub>
+  <sub>Maintained by <b>Eduardo de Lima Paranhos</b> · <b>VANTA Labz</b></sub>
 </div>

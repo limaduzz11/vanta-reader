@@ -27,13 +27,13 @@ class _FailingProvider implements ContentProvider {
 
   @override
   ProviderCapabilities get capabilities => const ProviderCapabilities(
-        supportsSearch: true,
-        supportsDownload: false,
-        supportsStreaming: false,
-        supportedFormats: {WorkFormat.epub},
-        supportedLanguages: {'pt-BR', 'en', 'und'},
-        supportedTypes: {WorkType.book, WorkType.comic},
-      );
+    supportsSearch: true,
+    supportsDownload: false,
+    supportsStreaming: false,
+    supportedFormats: {WorkFormat.epub},
+    supportedLanguages: {'pt-BR', 'en', 'und'},
+    supportedTypes: {WorkType.book, WorkType.comic},
+  );
 
   @override
   Future<ProviderHealth> checkHealth() async =>
@@ -58,8 +58,7 @@ class _FailingProvider implements ContentProvider {
   Future<String?> resolveDownloadUrl(
     String externalId,
     WorkFormat format,
-  ) async =>
-      null;
+  ) async => null;
 }
 
 void main() {
@@ -83,8 +82,11 @@ void main() {
       final second = await manager.search('duna');
       sw.stop();
       expect(second, isEmpty);
-      expect(failing.calls, equals(1),
-          reason: 'provider em TTL offline deve ser pulado');
+      expect(
+        failing.calls,
+        equals(1),
+        reason: 'provider em TTL offline deve ser pulado',
+      );
       expect(sw.elapsedMilliseconds, lessThan(2000));
     });
   });
@@ -115,10 +117,7 @@ void main() {
         await VantaConfig.persist(database, 'http://127.0.0.1:8081/');
         VantaConfig.runtimeOverride = null;
         await VantaConfig.loadPersisted(database);
-        expect(
-          VantaConfig.runtimeOverride,
-          equals('http://127.0.0.1:8081'),
-        );
+        expect(VantaConfig.runtimeOverride, equals('http://127.0.0.1:8081'));
         await VantaConfig.persist(database, '  ');
         expect(VantaConfig.runtimeOverride, isNull);
       } finally {
