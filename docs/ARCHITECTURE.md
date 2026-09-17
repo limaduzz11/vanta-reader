@@ -4,7 +4,7 @@ VANTA Reader follows **Clean Architecture** principles and a strict **Local-Firs
 
 ---
 
-## 🏛️ Architecture Layers
+## Architecture Layers
 
 The codebase is organized into four distinct layers with a one-way dependency rule:
 
@@ -45,7 +45,7 @@ The codebase is organized into four distinct layers with a one-way dependency ru
 
 ---
 
-## 🔑 Key Engineering Decisions
+## Key Engineering Decisions
 
 ### 1. Local-First & Offline Resilience
 - **SQLite Storage:** Metadata, library collections, authors, and reading progress (0–100%) are persisted locally via SQLite.
@@ -65,7 +65,7 @@ External catalog sources implement an abstract `ContentProvider` interface:
 
 ---
 
-## ⚖️ Known Limitations & Roadmap
+## Known Limitations & Roadmap
 
 - **PDF & CBR Formats:** PDF viewing and CBR (RAR) decompression are actively planned for future milestones.
 - **CBZ Memory Footprint:** Currently, CBZ archives are decoded in memory before extracting pages. A streaming random-access extraction model is planned for large archives.

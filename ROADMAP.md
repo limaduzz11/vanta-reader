@@ -4,7 +4,7 @@ This roadmap outlines the planned milestones for **VANTA Reader**. Priorities an
 
 ---
 
-## 📍 Milestones
+## Milestones
 
 ### Milestone 0.3.x — Foundation & Core Experience (Current)
 - [x] Local-first SQLite schema and migrations engine.

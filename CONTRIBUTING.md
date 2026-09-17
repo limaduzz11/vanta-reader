@@ -4,13 +4,13 @@ Thank you for your interest in contributing to **VANTA Reader**! We welcome bug 
 
 ---
 
-## 📋 Code of Conduct
+## Code of Conduct
 
 All contributors and maintainers are expected to adhere to our [Code of Conduct](CODE_OF_CONDUCT.md). Please be welcoming, respectful, and collaborative.
 
 ---
 
-## 🛠️ Development Setup
+## Development Setup
 
 1. **Prerequisites:**
    - [Flutter SDK](https://flutter.dev/docs/get-started/install) (stable channel, >= 3.12.0)
@@ -33,7 +33,7 @@ All contributors and maintainers are expected to adhere to our [Code of Conduct]
 
 ---
 
-## 🏛️ Architecture Conventions
+## Architecture Conventions
 
 VANTA Reader enforces a strict **Clean Architecture** boundary:
 
@@ -44,7 +44,7 @@ VANTA Reader enforces a strict **Clean Architecture** boundary:
 
 ---
 
-## 🧪 Quality Standards
+## Quality Standards
 
 Before submitting a Pull Request, please ensure all quality checks pass locally:
 
@@ -63,7 +63,7 @@ PRs must maintain 0 analysis warnings/errors and add automated tests for new log
 
 ---
 
-## 🌿 Git Workflow
+## Git Workflow
 
 1. Fork the repository and create your branch from `main`:
    ```bash
@@ -76,6 +76,6 @@ PRs must maintain 0 analysis warnings/errors and add automated tests for new log
 
 ---
 
-## 📄 License
+## License
 
 By contributing to VANTA Reader, you agree that your contributions will be licensed under the project's [MIT License](LICENSE).

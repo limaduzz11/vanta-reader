@@ -201,9 +201,9 @@ export VANTA_LOG_LEVEL="INFO"
 
 | Item | Status |
 |------|--------|
-| Contrato `/v1/catalog/import` | ✅ IMPLEMENTADO |
-| Script `import-libgen.py` | ✅ IMPLEMENTADO (CSV/JSON/NDJSON/SQLite) |
-| Resume (skip existing) | ✅ IMPLEMENTADO |
-| Download template local | ⏳ AGUARDA CONFIG (precisa de servidor HTTP local) |
-| Provedor LIBGEN direto (B) | 📋 PLANEJADO |
-| Resiliência no download | 📋 PLANEJADO |
+| Contrato `/v1/catalog/import` | IMPLEMENTADO |
+| Script `import-libgen.py` | IMPLEMENTADO (CSV/JSON/NDJSON/SQLite) |
+| Resume (skip existing) | IMPLEMENTADO |
+| Download template local | AGUARDA CONFIG (precisa de servidor HTTP local) |
+| Provedor LIBGEN direto (B) | PLANEJADO |
+| Resiliência no download | PLANEJADO |
